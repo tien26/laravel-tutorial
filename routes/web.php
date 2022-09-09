@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ClassController;
+use App\Http\Controllers\EskulController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\TearcherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +26,13 @@ Route::get('/', function () {
 });
 
 Route::get('/students', [StudentsController::class, 'index']);
+Route::get('/student/{id}', [StudentsController::class, 'show']);
+
+Route::get('/class', [ClassController::class, 'index']);
+Route::get('/class-detail/{id}', [ClassController::class, 'show']);
+
+Route::get('/eskul', [EskulController::class, 'index']);
+Route::get('/eskul-detail/{id}', [EskulController::class, 'show']);
+
+Route::get('/teacher', [TearcherController::class, 'index']);
+Route::get('/teacher-detail/{id}', [TearcherController::class, 'show']);

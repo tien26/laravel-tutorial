@@ -27,7 +27,13 @@
                 <a class="nav-link" href="/students">Students</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="//class">Class</a>
+                <a class="nav-link" href="/class">Class</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/eskul">Eskul</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/teacher">Teachers</a>
               </li>
             </ul>
           </div>
