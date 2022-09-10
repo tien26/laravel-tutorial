@@ -9,6 +9,7 @@ class EskulModel extends Model
 {
     use HasFactory;
     protected $table = 'eskuls';
+    protected $fillable = ['name'];
 
     public function students()
     {
