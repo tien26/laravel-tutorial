@@ -13,7 +13,7 @@ class StudentsController extends Controller
     public function index()
     {
         $data = [
-            'students' => StudentModel::get()
+            'students' => StudentModel::paginate(5)
         ];
         return view('student', $data);
     }
@@ -59,6 +59,30 @@ class StudentsController extends Controller
     {
         $data = StudentModel::findOrFail($id);
         $data->update($request->all());
+        return redirect('/students');
+    }
+
+    public function destroy($id)
+    {
+        StudentModel::findOrFail($id)->delete();
+        Session::flash('status', 'success');
+        Session::flash('message', 'delete success');
+        return redirect('/students');
+    }
+
+    public function deletedStudent()
+    {
+        $data = [
+            'students' => StudentModel::onlyTrashed()->get()
+        ];
+        return view('student-deleted-list', $data);
+    }
+
+    public function restore($id)
+    {
+        StudentModel::withTrashed()->where('id', $id)->restore();
+        Session::flash('status', 'success');
+        Session::flash('message', 'restore success');
         return redirect('/students');
     }
 }

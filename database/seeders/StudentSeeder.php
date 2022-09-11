@@ -17,28 +17,29 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        Schema::disableForeignKeyConstraints();
-        StudentModel::truncate();
-        Schema::enableForeignKeyConstraints();
+        StudentModel::factory()->count(5)->create();
+        // Schema::disableForeignKeyConstraints();
+        // StudentModel::truncate();
+        // Schema::enableForeignKeyConstraints();
 
-        // \App\Models\StudentModel::factory(10)->create();
+        // // \App\Models\StudentModel::factory(10)->create();
 
-        $data = [
-            ['name' => 'Irfan', 'gender' => 'L', 'nim' => '1101', 'class_id' => '1'],
-            ['name' => 'martien', 'gender' => 'L', 'nim' => '1102', 'class_id' => '2'],
-            ['name' => 'ainun', 'gender' => 'p', 'nim' => '1103', 'class_id' => '3'],
-            ['name' => 'fuadah', 'gender' => 'p', 'nim' => '11011', 'class_id' => '2'],
-        ];
+        // $data = [
+        //     ['name' => 'Irfan', 'gender' => 'L', 'nim' => '1101', 'class_id' => '1'],
+        //     ['name' => 'martien', 'gender' => 'L', 'nim' => '1102', 'class_id' => '2'],
+        //     ['name' => 'ainun', 'gender' => 'p', 'nim' => '1103', 'class_id' => '3'],
+        //     ['name' => 'fuadah', 'gender' => 'p', 'nim' => '11011', 'class_id' => '2'],
+        // ];
 
-        foreach ($data as $key) {
-            StudentModel::insert([
-                'name' => $key['name'],
-                'gender' => $key['gender'],
-                'nim' => $key['nim'],
-                'class_id' => $key['class_id'],
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]);
-        }
+        // foreach ($data as $key) {
+        //     StudentModel::insert([
+        //         'name' => $key['name'],
+        //         'gender' => $key['gender'],
+        //         'nim' => $key['nim'],
+        //         'class_id' => $key['class_id'],
+        //         'created_at' => Carbon::now(),
+        //         'updated_at' => Carbon::now(),
+        //     ]);
+        // }
     }
 }
