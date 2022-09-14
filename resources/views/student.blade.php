@@ -17,6 +17,18 @@
         </div>
     </div>
 
+    <div class="row my-3">
+        <div class="col-12 col-sm-8 col-md-5">
+            <form action="" method="get">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="keyword" aria-label="Username"
+                        aria-describedby="basic-addon1" name="keyword">
+                    <button type="submit" class="input-group-text btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col">
             <table class="table text-center">
@@ -26,6 +38,7 @@
                         <th>Name</th>
                         <th>Gender</th>
                         <th>Nim</th>
+                        <th>Class</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -36,6 +49,7 @@
                             <td>{{ $s->name }}</td>
                             <td>{{ $s->gender }}</td>
                             <td>{{ $s->nim }}</td>
+                            <td>{{ $s->class->name }}</td>
                             <td>
                                 <form action="student-delete/{{ $s->id }}" method="post">
                                     <a href="student/{{ $s->id }}" class="btn btn-sm btn-warning">Detail</a> | <a
@@ -43,7 +57,7 @@
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Apakah Yakin ? ');">Delete</button>
+                                        onclick="return confirm('Apakah Yakin ? ')">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -55,8 +69,7 @@
 
     <div class="row mt-3">
         <div class="col">
-            {{ $students->links() }}
-
+            {{ $students->withQueryString()->links() }}
         </div>
     </div>
 

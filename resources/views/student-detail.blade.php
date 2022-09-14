@@ -4,6 +4,15 @@
 @section('content')
     <div class="row justify-content-center mt-3">
         <div class="col-8">
+            @if ($student['image'] != '')
+                <img src="{{ asset('storage/photo/' . $student['image']) }}" alt="image" width="200px">
+            @else
+                <img src="{{ asset('img/default.png') }}" alt="image" width="200px">
+            @endif
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-8">
             <div class="card">
                 <div class="card-header">
                     <h3>Detail siswa {{ $student['name'] }}</h3>

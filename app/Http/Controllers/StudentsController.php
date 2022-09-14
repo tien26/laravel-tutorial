@@ -10,10 +10,17 @@ use Illuminate\Support\Facades\Session;
 
 class StudentsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->keyword;
         $data = [
-            'students' => StudentModel::paginate(5)
+            'students' => StudentModel::with('class')
+                ->where('name', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('name', 'LIKE', '%' . $keyword . '%')
+                ->orWhereHas('class', function ($query) use ($keyword) {
+                    $query->where('name', 'LIKE', '%' . $keyword . '%');
+                })
+                ->paginate(5)
         ];
         return view('student', $data);
     }
@@ -36,6 +43,15 @@ class StudentsController extends Controller
 
     public function store(StudentCreateRequest $request)
     {
+        $nameFile = '';
+
+        if ($request->file('photo')) {
+            $extention = $request->file('photo')->getClientOriginalExtension();
+            $nameFile = $request->name . '-' . now()->timestamp . '.' . $extention;
+            $request->file('photo')->storeAs('photo', $nameFile);
+        }
+
+        $request['image'] = $nameFile;
         $student = StudentModel::create($request->all());
         if ($student) {
             Session::flash('status', 'success');
